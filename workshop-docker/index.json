@@ -44,7 +44,7 @@
   },
   "environment": {
     "uilayout": "editor-terminal",
-     "uimessage1": "\u001b[32mEste é o seu terminal Bash.Um lugar seguro para você testar as suas lições e aprender. :)\u001b[m\r\n"
+     "uimessage1": "\u001b[32mEste é o seu terminal Bash.Um lugar seguro para você testar as suas lições e aprender :)\u001b[m\r\n"
 
   },
   "backend": {
