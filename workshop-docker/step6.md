@@ -1,6 +1,6 @@
 ### Criando um site wordpress
 
-Embora a execução de um único contêiner seja útil, é muito mais útil poder executar vários contêineres em conjunto, de modo que um aplicativo inteiro possa ser executado.
+Embora a execução de um único container seja útil, é muito mais útil poder executar vários containers em conjunto, de modo que um aplicativo inteiro possa ser executado.
 
 
 A Docker disponibiliza esse recurso por meio do docker-compose.
