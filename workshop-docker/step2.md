@@ -1,7 +1,7 @@
 #### Uso básico de docker
 
 
-Como vimos durante o Workshop, o docker é uma forma muito simples e produtiva de usar-se containers.
+O docker é uma forma muito simples e produtiva de utilizarmos containers.
 
 O Docker permite criar e executar contêineres independentes usando alguns comandos de linha de comando.
 
