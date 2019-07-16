@@ -26,7 +26,7 @@ Agora, execute novamente o mesmo contêiner no modo deamon usando "-d" da seguin
 Agora confirme se o seu contêiner está em execução usando: `docker ps`{{execute}}. Você verá o contêiner nginx na lista.
 
 
-Você pode fazer um pedido ao seu contêiner: `curl http://docker:80`{{execute}}
+Você pode fazer um pedido ao seu contêiner: `curl http://localhost:80`{{execute}}
 
 
 Você poderá acessar a página pelo seu navegador (verá a tela default do nginx). Para isso, acesse a url: visitar a URL https://[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/
