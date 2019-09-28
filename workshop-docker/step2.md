@@ -1,7 +1,7 @@
 #### Uso básico de docker
 
 
-O docker é uma forma muito simples e produtiva de utilizarmos containers.
+O Docker é uma forma muito simples e produtiva de utilizarmos containers.
 
 O Docker permite criar e executar containers independentes usando alguns comandos de linha de comando.
 

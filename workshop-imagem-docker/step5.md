@@ -5,7 +5,7 @@ Primeiro, vamos citar alguns conceitos importantes:
 
   * O tempo de vida de um container é igual ao tempo de vida do processo mestre. Se o processo mestre for um serviço, como nginx, o container será executado por um período mais longo.
   * Podemos usar o docker executando da forma "Detached mode", isto é: O container irá executar em segundo plano (background) e sem dependência do terminal - isto é, ao sair do terminal, o container não irá finalizar. Exemplo: `docker run -d <nome_imagem>`
-  * Podemos redirecionar/ligar uma porta do host a uma porta do container. Chamamos isso de expor portas. Para isso, indicamos o redirecionamento de portas assim: "-p <container port>: <host port>". A execução seria algo nesse sentido: `docker run -p 80:8080 <nome_imagem>`. Nesse exemplo, estariamos apontando a porta 8080 do container para a porta 80 do host. Com isso, você iria conseguir "acessar o serviço do container" chamando a porta 80 no host.
+  * Podemos redirecionar/ligar uma porta do host a uma porta do container. Chamamos isso de expor portas. Para isso, indicamos o redirecionamento de portas assim: "-p <container port>: <host port>". A execução seria algo nesse sentido: `docker run -p 80:8080 <nome_imagem>`. Nesse exemplo, estaríamos apontando a porta 8080 do container para a porta 80 do host. Com isso, você iria conseguir "acessar o serviço do container" chamando a porta 80 no host.
 
 
 Bom, agora que fizemos as honras e apresentamos alguns conceitos interessantes, vamos estudar um pouquinho. Para esta etapa, vamos utilizar um container de Nginx. Vamos nessa!

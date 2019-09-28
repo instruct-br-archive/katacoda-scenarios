@@ -47,7 +47,7 @@ Agora, você precisa iniciar a pilha. Para isso, execute: `docker-compose up`{{e
 
 
 
-Após algum tempo (acompanhe os logs na tela), os containers de banco de dados e o apache serão criados. Quando tudo tiver ativo já, você poderá acessar por aqui para finalizar a instalação do Wordpress: https://[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/ (Recomendamos abrir em uma aba anônima, por causa do cache do browser).
+Após algum tempo (acompanhe os logs na tela), os containers de banco de dados e o apache serão criados. Quando tudo estiver ativo, você poderá acessar por aqui para finalizar a instalação do Wordpress: https://[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/ (Recomendamos abrir em uma aba anônima, por causa do cache do browser).
 
 
 Sim, você acabou de criar um Wordpress novinho!!
