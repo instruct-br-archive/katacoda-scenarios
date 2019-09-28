@@ -1,65 +1,52 @@
-### Criando um site wordpress
+### Ignorando arquivos
 
-Embora a execução de um único container seja útil, é muito mais útil poder executar vários containers em conjunto, de modo que um aplicativo inteiro possa ser executado.
+Caso você tenha buildado toda alteração que fez no arquivo Dockerfile perceberá que a geração de imagem não usa cache depois da linha:
 
+```
+COPY . ./
+```
 
-A Docker disponibiliza esse recurso por meio do docker-compose.
+Isso ocorre pois o Docker checa as mudanças em ".", ou seja, nosso diretório de trabalho e nesse caso Dockerfile possui uma alteração.
 
+Como ele não é um arquivo que precisamos que esteja dentro da nossa imagem, assim como outros arquivos como `*.tmp` ou `.DS_Store` ou pastas como `.git` ou `node_modules`. Podemos ignorar sua existência e garantir que eles não invalidem o cache e não sejam copiados para dentro desse nossa imagem gerando um peso desnecessário.
 
-O docker-compose nos permite estipular como um conjunto de containers irão se comportar - inclusive como funcionará volumes, rede, portas, etc.
+Para isso criaremos o arquivo `.dockerignore` usando o comando abaixo:
 
-Para essa lição, iremos criar um docker-compose simples para iniciar um Wordpress.
+`touch .dockerignore`{{execute}}
 
+No nosso caso, como queremos garantir apenas que o Dockerfile não invalide o cache vamos adicionar:
 
-Veja o exemplo de um docker-compose que inicia um Wordpress.
+<pre class="file" data-filename=".dockerignore" data-target="replace">
+Dockerfile
+</pre>
 
+Agora vamos buildar nossa imagem: `docker build -t minha-aplicacao .`{{execute}}
 
-    version: '3.3'
-    services:
-       db:
-         image: mysql:5.7
-         restart: always
-         environment:
-           MYSQL_ROOT_PASSWORD: somewordpress
-           MYSQL_DATABASE: wordpress
-           MYSQL_USER: wordpress
-           MYSQL_PASSWORD: wordpress   
+Com isso novas alterações no arquivo Dockerfile serão ignoradas.
 
-       wordpress:
-         depends_on:
-           - db
-         image: wordpress:latest
-         ports:
-           - "80:80"
-         restart: always
-         environment:
-           WORDPRESS_DB_HOST: db:3306
-           WORDPRESS_DB_USER: wordpress
-           WORDPRESS_DB_PASSWORD: wordpress
+### Usando Argumentos
+
+Em um cenário onde nossa imagem pode ser gerada dinamicamente em uma ferramenta de CI/CD teremos que importar variáveis em tempo de build. Nesse caso utilizaremos a instrução `ARG`
 
 
+<pre class="file" data-filename="Dockerfile" data-target="replace">
+ARG DOCKER_REGISTRY=index.docker.io
+FROM $DOCKER_REGISTRY/node:8-alpine AS builder
+COPY package*.json ./
+RUN npm install
+COPY . ./
+RUN npm run build
 
+FROM nginx:alpine
+WORKDIR /usr/share/nginx/html
+COPY --from=builder /dist .
+EXPOSE 80
+</pre>
 
-Crie um arquivo chamado docker-compose.yaml `touch docker-compose.yaml`{{execute}} e inclua o conteúdo acima nele.
+No exemplo acima poderemos receber um argumento em tempo de build da imagem para receber de qual registry baixaremos nossa imagem. No nosso caso deixamos um valor padrão caso esse argumento não seja passado.
 
+Se testarmos executar o comando passando um argumento inválido:
 
-Agora, você precisa iniciar a pilha. Para isso, execute: `docker-compose up`{{execute}} .A pilha será iniciada, o banco do wordpress será criado em tempo de execução, após alguns instantes, você verá que o serviço do Apache será iniciando.
+`docker build --build-arg DOCKER_REGISTRY=teste -t minha-aplicacao .`{{execute}}
 
-
-
-Após algum tempo (acompanhe os logs na tela), os containers de banco de dados e o apache serão criados. Quando tudo estiver ativo, você poderá acessar por aqui para finalizar a instalação do Wordpress: https://[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/ (Recomendamos abrir em uma aba anônima, por causa do cache do browser).
-
-
-Sim, você acabou de criar um Wordpress novinho!!
-
-
-
-
-Recomendamos:
-  * Aprofunde seus estudos nos comandos básicos do docker e docker-compose (use a documentação oficial)
-  * Crie pilhas de software para testar o docker-compose
-  * Crie novas imagens docker de acordo com suas necessidades de estudo
-  * NAVEGUE e CONHEÇA https://hub.docker.com/ . Crie uma conta lá. Aprendas com as imagens docker de outras pessoas e, principalente, publique suas imagens.
-
-
-Um forte abraço - essas foram lições bem básica, mas fundamentais.
+Veremos que nosso build irá falhar, já que não existe um registry docker "teste", nesse caso precisariamos apontar para um Nexus provisionado dentro de nossa infraestrutura por exemplo.

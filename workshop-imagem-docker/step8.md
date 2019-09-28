@@ -73,6 +73,8 @@ COPY --from=builder /dist .
 EXPOSE 80
 </pre>
 
+Precisamos buildar nossa imagem: `docker build -t minha-aplicacao .`{{execute}}
+
 Se executarmos o comando: `docker run --rm -d -it -p 80:80 --name=app minha-aplicacao`{{execute}}
 
 Você pode fazer um pedido ao seu container: `curl http://docker:80`{{execute}}
