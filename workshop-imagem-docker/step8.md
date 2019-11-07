@@ -7,7 +7,7 @@ Agora temos uma imagem funcional da nossa aplicação, porém se focarmos no tam
 REPOSITORY            TAG           IMAGE ID            CREATED             SIZE
 minha-aplicacao       latest        7feed57053c8        3 seconds ago       165MB
 ```
-Veremos que nossa aplicação, mesmo sendo um SPA simples está gerando uma imagem de 165MB. Podemos melhorar isso!
+Veremos que nossa aplicação, mesmo sendo um SPA simples está gerando uma imagem de 165MB ou mais. Podemos melhorar isso!
 
 ### Onde queremos chegar
 

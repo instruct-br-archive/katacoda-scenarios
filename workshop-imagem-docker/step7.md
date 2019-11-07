@@ -34,7 +34,7 @@ Para testar podemos buildar nossa imagem várias vezes e verificar se todas as c
 
 ### Executando nossa aplicação
 
-Agora já temos nossa aplicação dentro da imagem, porém ela ainda não está sendo executada, como comentamos o Nuxt possui um comando que sobe um servidor local `npm run serve`. Então vamos atualizar nosso Dockerfile
+Agora já temos nossa aplicação dentro da imagem, porém ela ainda não está sendo executada, como comentamos o Nuxt possui um comando que sobe um servidor local `npm run dev`. Então vamos atualizar nosso Dockerfile
 
 <pre class="file" data-filename="Dockerfile" data-target="replace">
 FROM node:8-alpine
@@ -45,7 +45,7 @@ RUN npm run build
 
 # Servindo nossa aplicação
 EXPOSE 3000
-CMD ["npm", "run", "serve"]
+CMD ["npm", "run", "dev"]
 </pre>
 
 Repare que além da instrução `CMD` no formato exec, acionamos uma nova chamada `EXPOSE` ela não expõe ou abre a porta mas sim é maneira de documentar e deixar explícito em qual porta nossa aplicação estará.
